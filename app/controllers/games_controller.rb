@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :join]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :join, :place_ships]
   respond_to :json
 
   # GET /games
@@ -55,6 +55,8 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1/place-ships
   # PATCH/PUT /games/1/place-ships.json
   def place_ships
+    @game.place_ships
+    @game.save
     render json: @game, status: 200
   end
 

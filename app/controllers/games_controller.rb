@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :join]
   respond_to :json
 
   # GET /games
@@ -33,13 +33,20 @@ class GamesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /games/1/join.json
+  def join
+    @game.player2 = params[:player2]
+
+    if @game.update(game_params)
+      render json: @game, status: 200
+    end
+  end
+
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
     if @game.update(game_params)
-      render :show, status: :ok, location: @game 
-    else
-      render json: @game.errors, status: :unprocessable_entity
+      render json: @game, status: 200
     end
   end
 

@@ -11,6 +11,7 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    render json: @game
   end
 
   # GET /games/new
@@ -49,6 +50,12 @@ class GamesController < ApplicationController
     if @game.update(game_params)
       render json: @game, status: 200
     end
+  end
+
+  # PATCH/PUT /games/1/place-ships
+  # PATCH/PUT /games/1/place-ships.json
+  def place_ships
+    render json: @game, status: 200
   end
 
   # DELETE /games/1

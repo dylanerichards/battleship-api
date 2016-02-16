@@ -26,7 +26,6 @@ class Game < ActiveRecord::Base
 
   def nuke(coordinate, player)
     self.send("#{coordinate.to_sym}=", "Nuked by #{player}")
-
     self.save
   end
 

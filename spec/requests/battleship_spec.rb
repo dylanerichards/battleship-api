@@ -24,4 +24,19 @@ describe "Battleship API" do
 
     end
   end
+
+  describe "PUT #place-ships" do
+    it 'places 10 ships on the board randomly, 5 per player' do
+      post "/games.json", player1: "player1"
+      put "/games/1/join.json", player2: "player2"
+
+      put "/games/1/place-ships.json"
+
+      json = JSON.parse(response.body)
+      expect(response).to be_success
+
+      expect(json.values.count("player1")).to eq 6
+      expect(json.values.count("player2")).to eq 6
+    end
+  end
 end

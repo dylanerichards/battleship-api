@@ -31,5 +31,16 @@ class Game < ActiveRecord::Base
   def nuke(coordinate, player)
     self.send("#{coordinate.to_sym}=", "Nuked by #{player}")
     self.save
+
+  end
+
+  def check_for_loser
+    if self.attributes.values.count(player1) == 1
+      "#{player1} loses!"
+    elsif self.attributes.values.count(player2) == 1
+      "#{player2} loses!"
+    else
+      "No loser yet."
+    end
   end
 end

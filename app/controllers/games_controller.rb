@@ -64,7 +64,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1/nuke.json
   def nuke
     @game.nuke(params[:coordinate], params[:player])
-    render json: @game, status: 200
+    render json: { message: "Nuked #{params[:coordinate]}. #{@game.check_for_loser}", game: @game }
   end
 
   # DELETE /games/1

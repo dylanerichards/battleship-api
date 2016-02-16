@@ -27,10 +27,7 @@ describe "Battleship API" do
 
   describe "PUT #place-ships" do
     it 'places 10 ships on the board randomly, 5 per player' do
-      post "/games.json", player1: "player1"
-      put "/games/1/join.json", player2: "player2"
-
-      put "/games/1/place-ships.json"
+      pregame
 
       json = JSON.parse(response.body)
       expect(response).to be_success
@@ -42,14 +39,20 @@ describe "Battleship API" do
 
   describe "PUT #nuke" do
     it 'nukes the coordinate on behalf of the player' do
-      post "/games.json", player1: "player1"
-      put "/games/1/join.json", player2: "player2"
-      put "/games/1/place-ships.json"
+      pregame
 
       put "/games/1/nuke.json", player: "player1", coordinate: "a1"
 
       json = JSON.parse(response.body)
       expect(json["game"]["a1"]).to eq "Nuked by player1"
     end
+  end
+
+  private
+
+  def pregame
+      post "/games.json", player1: "player1"
+      put "/games/1/join.json", player2: "player2"
+      put "/games/1/place-ships.json"
   end
 end

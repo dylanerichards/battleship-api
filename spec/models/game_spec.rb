@@ -42,4 +42,27 @@ describe Game do
       expect(game.a1).to eq "Nuked by hello"
     end
   end
+
+  describe "#check_for_loser" do
+    it 'returns the loser when there is one' do
+      game.player1 = "hello"
+      game.player2 = "world"
+
+      game.place_ships
+
+      occupied_by_player1 = []
+
+      game.attributes.each do |attribute|
+        occupied_by_player1 << attribute[0] if attribute[1] == "hello"
+      end
+
+      occupied_by_player1.delete("player1")
+
+      occupied_by_player1.each do |coordinate|
+        game.nuke(coordinate, "world")
+      end
+
+      expect(game.check_for_loser).to eq "hello loses!"
+    end
+  end
 end

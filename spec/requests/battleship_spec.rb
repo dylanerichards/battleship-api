@@ -51,8 +51,8 @@ describe "Battleship API" do
   private
 
   def pregame
-      post "/games.json", player1: "player1"
-      put "/games/1/join.json", player2: "player2"
-      put "/games/1/place-ships.json"
+    post "/games.json", player1: "player1"
+    put "/games/1/join.json", player2: "player2"
+    put "/games/1/place-ships.json"
   end
 end

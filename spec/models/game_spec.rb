@@ -50,19 +50,25 @@ describe Game do
 
       game.place_ships
 
-      occupied_by_player1 = []
-
-      game.attributes.each do |attribute|
-        occupied_by_player1 << attribute[0] if attribute[1] == "hello"
-      end
-
-      occupied_by_player1.delete("player1")
-
-      occupied_by_player1.each do |coordinate|
-        game.nuke(coordinate, "world")
-      end
+      nuke_all_player1_ships
 
       expect(game.check_for_loser).to eq "hello loses!"
+    end
+  end
+
+  private
+
+  def nuke_all_player1_ships
+    occupied_by_player1 = []
+
+    game.attributes.each do |attribute|
+      occupied_by_player1 << attribute[0] if attribute[1] == "hello"
+    end
+
+    occupied_by_player1.delete("player1")
+
+    occupied_by_player1.each do |coordinate|
+      game.nuke(coordinate, "world")
     end
   end
 end

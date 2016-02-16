@@ -21,6 +21,17 @@ describe Game do
         expect(game.coordinates.include?(coord)).to eq true
       end
     end
+  end
 
+  describe "#place_ships" do
+    it 'places 5 ships on the board per player' do
+      game.player1 = "hello"
+      game.player2 = "world"
+
+      game.place_ships
+
+      expect(game.attributes.values.count("hello")).to eq 6
+      expect(game.attributes.values.count("world")).to eq 6
+    end
   end
 end

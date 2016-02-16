@@ -1,6 +1,6 @@
 describe "Battleship API" do
 
-  describe "POST #create" do
+  describe "POST /games.json" do
     it 'creates a game with the new player' do
       post "/games.json", player1: "player1"
 
@@ -11,7 +11,7 @@ describe "Battleship API" do
     end
   end
 
-  describe "PUT #join" do
+  describe "PUT /games/:id/join.json" do
     it 'joins an existing game with player 2' do
       post "/games.json", player1: "player1"
 
@@ -25,7 +25,7 @@ describe "Battleship API" do
     end
   end
 
-  describe "PUT #place-ships" do
+  describe "PUT /games/:id/place-ships" do
     it 'places 10 ships on the board randomly, 5 per player' do
       pregame
 
@@ -37,7 +37,7 @@ describe "Battleship API" do
     end
   end
 
-  describe "PUT #nuke" do
+  describe "PUT /games/:id/nuke?player=foo&coordinate=bar" do
     it 'nukes the coordinate on behalf of the player' do
       pregame
 

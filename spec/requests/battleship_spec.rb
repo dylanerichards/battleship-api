@@ -39,4 +39,17 @@ describe "Battleship API" do
       expect(json.values.count("player2")).to eq 6
     end
   end
+
+  describe "PUT #nuke" do
+    it 'nukes the coordinate on behalf of the player' do
+      post "/games.json", player1: "player1"
+      put "/games/1/join.json", player2: "player2"
+      put "/games/1/place-ships.json"
+
+      put "/games/1/nuke.json", player: "player1", coordinate: "a1"
+
+      json = JSON.parse(response.body)
+      expect(json["game"]["a1"]).to eq "Nuked by player1"
+    end
+  end
 end

@@ -30,9 +30,9 @@ class Game < ActiveRecord::Base
   end
 
   def check_for_loser
-    if self.attributes.values.count(player1) == 1
+    if all_ships_nuked_for(player1)
       "#{player1} loses!"
-    elsif self.attributes.values.count(player2) == 1
+    elsif all_ships_nuked_for(player2)
       "#{player2} loses!"
     else
       "No loser yet."
@@ -48,5 +48,9 @@ class Game < ActiveRecord::Base
   def place_ship(player, coordinate)
     self.send("#{coordinate.to_sym}=", player)
     self.save
+  end
+
+  def all_ships_nuked_for(player)
+    self.attributes.values.count(player) == 1
   end
 end

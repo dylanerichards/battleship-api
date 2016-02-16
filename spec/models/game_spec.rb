@@ -34,4 +34,12 @@ describe Game do
       expect(game.attributes.values.count("world")).to eq 6
     end
   end
+
+  describe "#nuke" do
+    it 'nukes the specified coordinate with the appropriate player' do
+      game.nuke("a1", "hello")
+
+      expect(game.a1).to eq "Nuked by hello"
+    end
+  end
 end

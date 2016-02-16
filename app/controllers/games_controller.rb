@@ -2,13 +2,11 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :join, :place_ships, :nuke]
   respond_to :json
 
-  # GET /games
   # GET /games.json
   def index
     @games = Game.all
   end
 
-  # GET /games/1
   # GET /games/1.json
   def show
     render json: @game
@@ -23,7 +21,6 @@ class GamesController < ApplicationController
   def edit
   end
 
-  # POST /games
   # POST /games.json
   def create
     @game = Game.new(game_params)
@@ -44,7 +41,6 @@ class GamesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
     if @game.update(game_params)
@@ -52,7 +48,6 @@ class GamesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /games/1/place-ships
   # PATCH/PUT /games/1/place-ships.json
   def place_ships
     @game.place_ships
@@ -60,14 +55,12 @@ class GamesController < ApplicationController
     render json: @game, status: 200
   end
 
-  # PATCH/PUT /games/1/nuke
   # PATCH/PUT /games/1/nuke.json
   def nuke
     @game.nuke(params[:coordinate], params[:player])
     render json: { message: "Nuked #{params[:coordinate]}. #{@game.check_for_loser}", game: @game }
   end
 
-  # DELETE /games/1
   # DELETE /games/1.json
   def destroy
     @game.destroy
@@ -75,12 +68,11 @@ class GamesController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_game
     @game = Game.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def game_params
     params.fetch(:game, {})
   end

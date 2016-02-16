@@ -37,7 +37,7 @@ describe "Battleship API" do
     end
   end
 
-  describe "PUT /games/:id/nuke?player=foo&coordinate=bar" do
+  describe "PUT /games/:id/nuke?player1=foo&coordinate=a1" do
     it 'nukes the coordinate on behalf of the player' do
       pregame
 

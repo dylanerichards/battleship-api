@@ -1,6 +1,8 @@
 # Quick and Dirty Battleship
 ## A simple battleship API
 
+[Video of usage](https://youtu.be/NmWaZrFtMhY)
+
 ### Running the application
 - clone the repository
 - `cd` into it

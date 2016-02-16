@@ -14,18 +14,15 @@ class Game < ActiveRecord::Base
   def place_ships
     taken = []
 
-
     until board_is_filled_with(player1)
       coordinate = coordinates.sample
       taken << coordinate
-      self.send("#{coordinate.to_sym}=", player1)
-      self.save
+      place_ship(player1, coordinate)
     end
 
     until board_is_filled_with(player2)
       coordinate = (coordinates - taken).sample
-      self.send("#{coordinate.to_sym}=", player2)
-      self.save
+      place_ship(player2, coordinate)
     end
   end
 
@@ -44,9 +41,15 @@ class Game < ActiveRecord::Base
       "No loser yet."
     end
   end
+
   private
 
   def board_is_filled_with(player)
     self.attributes.values.count(player) == 6
+  end
+
+  def place_ship(player, coordinate)
+    self.send("#{coordinate.to_sym}=", player)
+    self.save
   end
 end

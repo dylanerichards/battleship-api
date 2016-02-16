@@ -1,5 +1,4 @@
 class Game < ActiveRecord::Base
-
   def coordinates
     coords = []
 
@@ -14,6 +13,7 @@ class Game < ActiveRecord::Base
 
   def place_ships
     taken = []
+
     until (self.attributes.values.count(player1)) == 6
       coordinate = coordinates.sample
       taken << coordinate
@@ -30,8 +30,8 @@ class Game < ActiveRecord::Base
 
   def nuke(coordinate, player)
     self.send("#{coordinate.to_sym}=", "Nuked by #{player}")
-    self.save
 
+    self.save
   end
 
   def check_for_loser
